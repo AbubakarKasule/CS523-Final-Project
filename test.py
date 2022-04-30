@@ -7,4 +7,6 @@ import Utils
 
 # print(np.base_repr(2730998, base=16))
 
-print(Utils.DIGITSETS)
+# print(Utils.DIGITSETS)
+
+print(Utils.get_transition_dictionary(5, 16, 512)['#rules'])

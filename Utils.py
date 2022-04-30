@@ -5,10 +5,10 @@ Note:
 """
 
 # Imports
-import numpy
+import numpy as np
 import math
 import random
-import networkx as nx
+# import networkx as nx
 
 # Constants
 DIGITS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
@@ -20,6 +20,32 @@ for i in range(2, 17):
 # Functions
 def get_new_state(neighborhood, curr_state, rule, base):
     pass
+
+"""
+a: # cells in nbhd
+b: possible # of cell states
+c: b^a length of each rule
+# of rules: b^c
+
+Function to map neighborhood to new state
+"""
+def get_transition_dictionary(neighborhood_size, base, rule):
+    res = dict()
+    num_of_cell_states = len(DIGITSETS[base])
+    rule_length = num_of_cell_states**neighborhood_size
+    num_of_rules = num_of_cell_states**rule_length
+
+    rule_string = str(np.base_repr(rule, base=base)).rjust(rule_length, "0")
+
+    for i in range(rule_length):
+        res[str(np.base_repr(i, base=base)).rjust(neighborhood_size, "0")] = rule_string[-1 - i]
+
+    res['rule'] = rule_string
+    res['#rules'] = num_of_rules
+
+    return res
+
+
 
 # Calculate Hamming Distance. 
 def get_hamming_distance(bitstr1, bitstr2):

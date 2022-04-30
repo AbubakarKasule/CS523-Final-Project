@@ -14,13 +14,15 @@ import seaborn as sn
 
 
 class Cell:
-    def __init__(self, state, neighbors, base):
+    def __init__(self, state, neighbors, rule, base):
         self.state = state
         self.neighbors = neighbors
         self.base = base
 
     def get_next_state(self):
         digits = Utils.DIGITSETS[self.base]
+
+
 
         new_cell = Cell()
  
