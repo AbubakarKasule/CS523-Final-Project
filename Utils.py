@@ -11,7 +11,7 @@ import random
 # import networkx as nx
 
 # Constants
-DIGITS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
+DIGITS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G"]
 DIGITSETS = dict()
 
 for i in range(2, 17):
@@ -41,7 +41,7 @@ def get_transition_dictionary(neighborhood_size, base, rule):
         res[str(np.base_repr(i, base=base)).rjust(neighborhood_size, "0")] = rule_string[-1 - i]
 
     res['rule'] = rule_string
-    res['#rules'] = num_of_rules
+    # res['#rules'] = num_of_rules
 
     return res
 

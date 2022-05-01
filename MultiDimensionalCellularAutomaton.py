@@ -1,7 +1,24 @@
 """
 Author: Abubakar Kasule
-Description: Class used to represent a one dimensional CA
-Note:  
+Description: Class used to represent an X dimensional CA
+Note: Dimensions above 1 still nee to be represented by a single array
+
+    For Example:
+                       [[1, 5, 3],
+        The 2D-Array    [6, 9, 9],  should be represented as the 1D-Array [1, 5, 3, 6, 9, 9, 3, 2, 5]
+                        [3, 2, 5]] 
+
+    Your Neighborhood function should account for this when returning the indeces of the neighbors
+
+    A tuple describing the shape of your data must also be included
+
+    For Example:
+
+       [[[5, 7, 7], [8, 1, 3], [6, 5, 6]],
+        [[1, 1, 0], [9, 9, 7], [3, 3, 1]],   --->   (3, 3, 3) ---> [5, 7, 7, 8, 1, 3, 6, 5, 6, 1, 1, 0, 9, 9, 7, 3, 3, 1, 4, 7, 3, 9, 0, 4, 7, 7, 4]
+        [[4, 7, 3], [9, 0, 4], [7, 7, 4]]]
+
+    This is required for your data to be interpreted properly
 """
 
 # Imports
@@ -16,8 +33,8 @@ import sys
 import time
 
 
-class OneDimensionalCellularAutomaton:
-    def __init__(self, neighborhood_function, neighborhood_size=3, population_size=10, rule=30, init_pop=['0','0','1','0','0'], base=2):
+class MultiDimensionalCellularAutomaton:
+    def __init__(self, neighborhood_function, neighborhood_size=3, rule=30, dimensions=(3, 3), init_pop=['0', '0', '1', '0', '1', '1', '0', '0', '1'], base=2):
         self.rule = rule
         self.init_pop = init_pop
         self.base = base
