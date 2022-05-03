@@ -14,15 +14,17 @@ import seaborn as sn
 import numpy as np
 import sys
 import time
+import math
 
 
 class OneDimensionalCellularAutomaton:
-    def __init__(self, neighborhood_function, neighborhood_size=3, population_size=10, rule=30, init_pop=['0','0','1','0','0'], base=2):
+    def __init__(self, neighborhood_function, neighborhood_size=3, population_size=10, rule=30, init_pop=['0','0','1','0','0'], base=2, color_palette=None):
         self.rule = rule
         self.init_pop = init_pop
         self.base = base
         self.history = [init_pop]
         self.get_neighbors = neighborhood_function
+        self.color_palette = color_palette
         self.neighborhood_size = neighborhood_size
         self.transition_dictionary = Utils.get_transition_dictionary(neighborhood_size, base, rule)
 
@@ -50,13 +52,20 @@ class OneDimensionalCellularAutomaton:
         ERASE_LINE = '\x1b[2K'
         
         print("\nIteration Progress:\n")
+        emotesv = ["<", "<", ">"]
+        h = ["-", "\\", "|", "/"]
+
+        block_size = 50/x
+
         for i in range(x):
             
             self.apply_rule()
-            b = "[" + str("X" * i) + str("-" * (x - (i + 1))) + "]"
+            offset = math.ceil((i + 1) * block_size)       # 
+            _offset = math.floor((block_size * (x - i - 1)) / 2)
+            b = "[" + str("=" * offset) + str(emotesv[i%3] + emotesv[(i + 1)%3] + emotesv[(i + 2)%3]) * _offset + "]  " +  h[i%4] + " " + str((i + 1)/x * 100)[:4] + "% Complete..."
             sys.stdout.write(ERASE_LINE+'\r')
             print(b, end="")
-            # time.sleep(0.1)
+            time.sleep(0.05)
             
         print("\n")
 
@@ -100,8 +109,8 @@ class OneDimensionalCellularAutomaton:
             array.append(list([int(x, base=self.base) for x in gen]))
 
         df_cm = pd.DataFrame(array, index =list([x for x in range(len(self.history))]), columns =list([x for x in range(len(self.history[0]))]))
-        plt.figure(figsize = (20,20)) 
-        sn.heatmap(df_cm, annot=annot, cbar=legend)
+        plt.figure(figsize = (len(self.history[0]), len(self.history))) 
+        sn.heatmap(df_cm, annot=annot, cbar=legend, cmap=self.color_palette)
 
         if legend:
             plt.xlabel("Cell Number")

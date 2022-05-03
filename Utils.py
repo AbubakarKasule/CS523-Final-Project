@@ -45,6 +45,12 @@ def get_transition_dictionary(neighborhood_size, base, rule):
 
     return res
 
+def get_num_of_rules(neighborhood_size, base):
+    num_of_cell_states = len(DIGITSETS[base])
+    rule_length = num_of_cell_states**neighborhood_size
+    num_of_rules = num_of_cell_states**rule_length
+
+    return num_of_rules
 
 
 # Calculate Hamming Distance. 
