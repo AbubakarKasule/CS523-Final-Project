@@ -2,6 +2,7 @@ images/*
 
 videos/*
 
+<<<<<<< HEAD
 temp_images_0/*
 temp_images_1/*
 temp_images_2/*
@@ -17,3 +18,9 @@ temp_images_8/*
 *.mp4
 
 *.txt
+=======
+temp_images_BigVid
+
+temp_images_SmolVid
+
+>>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650
