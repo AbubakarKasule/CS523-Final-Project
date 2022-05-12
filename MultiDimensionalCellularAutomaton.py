@@ -33,7 +33,6 @@ import math
 import os
 import time
 import moviepy.video.io.ImageSequenceClip
-<<<<<<< HEAD
 import multiprocessing as mp
 from multiprocessing import Pool
 import platform
@@ -44,27 +43,16 @@ init(autoreset=True)
 class MultiDimensionalCellularAutomaton:
 
     def __init__(self, neighborhood_function, neighborhood_size=3, rule=30, dimensions=(3, 3), init_pop=['0', '0', '1', '0', '1', '1', '0', '0', '1'], base=2, color_palette_idx=5):
-=======
-
-class MultiDimensionalCellularAutomaton:
-    def __init__(self, neighborhood_function, neighborhood_size=3, rule=30, dimensions=(3, 3), init_pop=['0', '0', '1', '0', '1', '1', '0', '0', '1'], base=2, color_palette=None):
->>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650
         self.rule = rule
         self.base = base
         self.history = [init_pop]
         self.dimensions = dimensions
         self.get_neighbors = neighborhood_function
         self.neighborhood_size = neighborhood_size
-<<<<<<< HEAD
         self.color_palette_idx = color_palette_idx
         self.transition_dictionary = Utils.get_transition_dictionary(neighborhood_size, base, rule)
 
 
-=======
-        self.color_palette = color_palette
-        self.transition_dictionary = Utils.get_transition_dictionary(neighborhood_size, base, rule)
-
->>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650
     def apply_rule(self):
         res = list()
         curr = self.history[-1]
@@ -83,7 +71,6 @@ class MultiDimensionalCellularAutomaton:
     def return_latest_generation(self):
         return self.history[-1]      
 
-<<<<<<< HEAD
     def iterate(self, x, surpress_print=False):
         
         ERASE_LINE = '\x1b[2K'
@@ -125,28 +112,6 @@ class MultiDimensionalCellularAutomaton:
         if not surpress_print:    
             print(Style.RESET_ALL)     
             print("")
-=======
-    def iterate(self, x):
-        ERASE_LINE = '\x1b[2K'
-        
-        print("\nIteration Progress:\n")
-        emotesv = ["<", "<", ">"]
-        h = ["-", "\\", "|", "/"]
-
-        block_size = 50/x
-
-        for i in range(x):
-            
-            self.apply_rule()
-            offset = math.ceil((i + 1) * block_size)       # 
-            _offset = math.floor((block_size * (x - i - 1)) / 2)
-            b = "[" + str("=" * offset) + str(emotesv[i%3] + emotesv[(i + 1)%3] + emotesv[(i + 2)%3]) * _offset + "]  " +  h[i%4] + " " + str((i + 1)/x * 100)[:4] + "% Complete..."
-            sys.stdout.write(ERASE_LINE+'\r')
-            print(b, end="")
-            time.sleep(0.05)
-            
-        print("\n")
->>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650
 
     def get_base_n_input(self, n):
         res = "" 
@@ -193,7 +158,6 @@ class MultiDimensionalCellularAutomaton:
             res.append(temp)
 
         df_cm = pd.DataFrame(res)
-<<<<<<< HEAD
 
         if self.dimensions[1] > self.dimensions[0]:
             scale = ((self.dimensions[1] / self.dimensions[0]) * 20, 20)
@@ -204,10 +168,6 @@ class MultiDimensionalCellularAutomaton:
 
         plt.figure(figsize = scale) #(20,20)
         sn.heatmap(df_cm, annot=annot, cbar=legend, cmap=sn.color_palette(Utils.PALETTES[self.color_palette_idx], self.base))  # sn.color_palette("viridis", self.base)
-=======
-        plt.figure(figsize = (self.dimensions[1], self.dimensions[0])) #(20,20)
-        sn.heatmap(df_cm, annot=annot, cbar=legend, cmap=self.color_palette)  # sn.color_palette("viridis", self.base)
->>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650
 
         if legend:
             plt.xlabel("Cell Number")
@@ -219,16 +179,10 @@ class MultiDimensionalCellularAutomaton:
         plt.clf()
         plt.close('all')
 
-<<<<<<< HEAD
     
 
 
     def generate_media(self, legend=False, annot=False, directory="./", threads=-1):
-=======
-        
-
-    def generate_media(self, legend=False, annot=False, directory="./"):
->>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650
 
         if len(self.dimensions) == 1:
             array = list()
@@ -238,11 +192,7 @@ class MultiDimensionalCellularAutomaton:
 
             df_cm = pd.DataFrame(array, index =list([x for x in range(len(self.history))]), columns =list([x for x in range(len(self.history[0]))]))
             plt.figure(figsize = (self.dimensions[0], len(self.history))) 
-<<<<<<< HEAD
             sn.heatmap(df_cm, annot=annot, cbar=legend, cmap=sn.color_palette(Utils.PALETTES[self.color_palette_idx], self.base))
-=======
-            sn.heatmap(df_cm, annot=annot, cbar=legend, cmap=self.color_palette)
->>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650
 
             if legend:
                 plt.xlabel("Cell Number")
@@ -251,7 +201,6 @@ class MultiDimensionalCellularAutomaton:
                 plt.axis('off')
 
             plt.savefig(directory + str(self.get_base())+ "-" + str(self.get_rule())+ "-" + str(self.get_population_size()), bbox_inches='tight')
-<<<<<<< HEAD
         
         elif len(self.dimensions) == 2:
             image_folder = './temp_images/'
@@ -298,21 +247,6 @@ class MultiDimensionalCellularAutomaton:
             print("Intermediate")
             clip.write_videofile(directory + str(self.get_base())+ "-" + str(self.get_rule())[:10]+ "-" + str(self.get_population_size()) + '.mp4', audio=False, threads=threads, preset="ultrafast")
             print("Image to Video processing ends\n")
-=======
-        elif len(self.dimensions) == 2:
-            image_folder = './temp_images/'
-            os.mkdir(image_folder)
-
-            ### Create all the images
-            for i in range(len(self.history)):
-                self.produce_image(image_folder, i, legend=legend, annot=annot)
-
-            
-
-            image_files = [os.path.join(image_folder,img) for img in os.listdir(image_folder) if img.endswith(".png")]
-            clip = moviepy.video.io.ImageSequenceClip.ImageSequenceClip(image_files, fps=10)
-            clip.write_videofile(directory + str(self.get_base())+ "-" + str(self.get_rule())[:10]+ "-" + str(self.get_population_size()) + '.mp4')
->>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650
 
             for image in image_files:
                 os.remove(image)

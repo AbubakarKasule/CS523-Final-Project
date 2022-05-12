@@ -85,7 +85,6 @@ def game_of_life_neighborhood(idx):
     [get_idx(row - 1, col - 1), get_idx(row - 1, col + 1),
             get_idx(row, col),
             get_idx(row + 1, col - 1), get_idx(row + 1, col + 1)]
-<<<<<<< HEAD
     
     [get_idx(row - 2, col - 2), get_idx(row - 2, col + 2),
             get_idx(row - 1, col - 1),
@@ -135,23 +134,3 @@ x.iterate(80)
 x.generate_media(directory="videos/"+str(base)+"/", threads=75)
 print(x)
 """
-=======
-    """
-
-    # tl, tc, tr - ml, [mc], mr - bl, bc, br
-    return [get_idx(row - 1, col - 1), get_idx(row - 1, col + 1),
-            get_idx(row, col),
-            get_idx(row + 1, col - 1), get_idx(row + 1, col + 1)]
-
-x = MultiDimensionalCellularAutomaton(game_of_life_neighborhood, 
-                                    neighborhood_size=len(game_of_life_neighborhood(0)), 
-                                    color_palette=sn.color_palette("viridis", base), 
-                                    base=base, 
-                                    dimensions=dimensions, 
-                                    rule=int(random.randint(0, Utils.get_num_of_rules(5, base))), 
-                                    init_pop=generate_random_2d_pop(base, dimensions))
-                                    
-x.iterate(1000)
-x.generate_media(directory="videos/"+str(base)+"/")
-print(x)
->>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650

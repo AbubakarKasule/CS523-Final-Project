@@ -18,11 +18,7 @@ import math
 
 
 class OneDimensionalCellularAutomaton:
-<<<<<<< HEAD
     def __init__(self, neighborhood_function, neighborhood_size=3, rule=30, init_pop=['0','0','1','0','0'], base=2, color_palette=None):
-=======
-    def __init__(self, neighborhood_function, neighborhood_size=3, population_size=10, rule=30, init_pop=['0','0','1','0','0'], base=2, color_palette=None):
->>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650
         self.rule = rule
         self.init_pop = init_pop
         self.base = base
@@ -56,11 +52,7 @@ class OneDimensionalCellularAutomaton:
         ERASE_LINE = '\x1b[2K'
         
         print("\nIteration Progress:\n")
-<<<<<<< HEAD
         emotesv = ["<", " ", ""]
-=======
-        emotesv = ["<", "<", ">"]
->>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650
         h = ["-", "\\", "|", "/"]
 
         block_size = 50/x
@@ -71,15 +63,9 @@ class OneDimensionalCellularAutomaton:
             offset = math.ceil((i + 1) * block_size)       # 
             _offset = math.floor((block_size * (x - i - 1)) / 2)
             b = "[" + str("=" * offset) + str(emotesv[i%3] + emotesv[(i + 1)%3] + emotesv[(i + 2)%3]) * _offset + "]  " +  h[i%4] + " " + str((i + 1)/x * 100)[:4] + "% Complete..."
-<<<<<<< HEAD
             # sys.stdout.write(ERASE_LINE+'\r')
             print(b, end="\r")
             # time.sleep(0.05)
-=======
-            sys.stdout.write(ERASE_LINE+'\r')
-            print(b, end="")
-            time.sleep(0.05)
->>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650
             
         print("\n")
 
@@ -132,11 +118,7 @@ class OneDimensionalCellularAutomaton:
         else:
             plt.axis('off')
 
-<<<<<<< HEAD
         plt.savefig(directory + str(self.get_base())+ "-" + str(self.get_rule())[:3]+ "-" + str(self.get_population_size()), bbox_inches='tight')
-=======
-        plt.savefig(directory + str(self.get_base())+ "-" + str(self.get_rule())+ "-" + str(self.get_population_size()), bbox_inches='tight')
->>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650
 
     def __str__(self):
         first = ""  

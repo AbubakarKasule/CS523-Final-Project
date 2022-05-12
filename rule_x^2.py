@@ -41,7 +41,7 @@ x = MultiDimensionalCellularAutomaton(perfect_memory_neighborhood,
                                     init_pop=['0', '1', '0', '1', '0', '1', '0', '1']) #generate_random_2d_pop(base, dimensions))
 
 
-for n in range(16):
+for n in range(100):
     # Reset
     input_list = list([i for i in str(np.base_repr(n, base=base)).rjust(pop_size, "0")])
     x.history = list([input_list])
@@ -57,25 +57,22 @@ for n in range(16):
 
     results.append(automata_answer)
 
+    if f(n) % 256 == automata_answer:
+        correct += 1
 
 
-plt.plot(list(range(16)), results, label = "CA Model")
-plt.plot(list(range(16)), [f(x) for x in range(16)], label = "Target Function")
+    total += 1
+
+
+print("Accuracy: ", str(correct/total)[:4] + "%")
+
+
+
+plt.plot(list(range(100)), results, label = "CA Model")
+plt.plot(list(range(100)), [f(x) % 256 for x in range(100)], label = "Target Function")
 plt.legend()
-plt.savefig("Approximation graph x^2")
+plt.savefig("Approximation graph x^2Extended.png")
 
 
 
 
-#     if f(n) == automata_answer:
-#         correct += 1
-#     else:
-#         print("For", n) #, input_list)
-#         print(list([i for i in str(np.base_repr(f(n), base=base)).rjust(pop_size, "0")]))
-#         print(x.return_latest_generation(), automata_answer)
-
-
-#     total += 1
-
-
-# print("Accuracy: ", str(correct/total)[:4] + "%")

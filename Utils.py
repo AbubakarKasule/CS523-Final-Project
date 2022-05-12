@@ -76,7 +76,6 @@ def get_num_of_rules(neighborhood_size, base):
     num_of_rules = num_of_cell_states**rule_length
 
     return num_of_rules
-<<<<<<< HEAD
 
 def apply_rule_parallel(input_tuple):
     self, target_function, n = input_tuple
@@ -95,8 +94,6 @@ def apply_rule_parallel(input_tuple):
             res.append(self.transition_dictionary[nbrs_string])
         except:
             print(nbrs, "o", curr)
-=======
->>>>>>> 8ec9b488608a431959362cd22e70126ef0eaa650
 
     temp = ""
 
