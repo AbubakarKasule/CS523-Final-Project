@@ -1,5 +1,7 @@
 # CS523-Final-Project
 
+Report.pdf is a report describing the purpose of this project
+
 ## Main driver code
 ```bash
 python3 Main.py
